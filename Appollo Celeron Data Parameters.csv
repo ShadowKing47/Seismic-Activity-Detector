@@ -1,0 +1,4 @@
+"Task","Estimated Computation Load","Approx. Processor Utilization (1-4 cores)","Approx. Time/Latency"
+"Seismic Data Preprocessing (20KB)","~0.1 to 0.5 billion instructions*","~10-20% CPU utilization","~10-50 ms (depends on filtering type, sample rate)"
+"Arm Operation / Miscellaneous Task","Lightweight","~5% CPU utilization (sporadic, background process)","<10 ms intermittent"
+"Machine Learning Inference (20KB model)","~0.5 to 2 billion instructions*","~30-50% CPU + fraction on GPU/NPU if used","Sub-second latency (~100-500 ms typical)"

@@ -1,0 +1,55 @@
+PowerPC750,,
+Parameter,Approximate Value / Range,Explanation
+Sampling Rate (Sensor Data),10 Hz to 100 Hz,Seismic sensor data sampled moderately; low enough for manageable I/O
+Filter Complexity,FIR filter order: 10 to 20 taps,Moderate complexity digital filter for noise reduction
+Filter Computation per Sample,~20 multiply-accumulate operations,Number of arithmetic operations per sample
+Data Size per Sample,~2 to 4 bytes,Typical raw sensor data size
+ML Model Size,20 KB,"Fixed, per user statement"
+ML Inference Rate,1 inference per second,Moderate inference frequency
+ML Inference Computations,A few thousand floating-point operations,Estimated for small feed-forward neural network or comparable model
+CPU Peak Usage,"20% to 35% average, 40% to 50% peak",When all tasks run concurrently
+Instruction Issue Rate,Up to 2 instructions dispatched per clock,MPC750 architecture characteristic
+Instructions per Cycle,Average 1 to 1.2 on workload,"Accounting for pipeline stalls, memory accesses"
+Memory Bandwidth Usage,"Moderate, cache hits ~90%, occasional misses",Limited by 32 KB L1 caches and optional 256 KB-1 MB L2 cache
+Interrupt Frequency,Less than 100 interrupts per second,Managing sensor data and periodic task scheduling
+,,
+,,
+Apollo Celeron,,
+"Parameter	",Assumed / Defined Value,Notes / Explanation
+Sampling Rate,"e.g., 100 Hz (100 samples/sec)",Typical seismic sensor data collection rate
+Filter Complexity,"e.g., 32-tap FIR filter",Moderate digital filter order
+Filter Computation,"e.g., Multiply-accumulate (MAC) ops per sample: 64 (32 taps * 2 ops)",Typical for FIR filter
+Data Size per Sample,2 bytes (16-bit resolution),Standard seismic data sample size
+Total Data Buffer Size,20 KB total,Small model size (assumed static input size)
+ML Model Size,20 KB,"Small lightweight model (e.g., for onboard inference)"
+ML Inference Rate,10 Hz (10 inferences/sec),Frequency of ML model execution
+ML Inference Computations,~1 million instructions per inference,Typical small model inferencing cost
+CPU Peak Frequency,1.6 GHz (Apollo Lake mid-tier approx),Based on processor specifications
+CPUs / Cores,2 Cores,Parallel processing possible but assuming single core for load estimation
+Peak Instructions per Cycle,2 Instructions,"Superscalar, dual-issue capability"
+Memory Bandwidth,12.8 GB/s (theoretical),From official datasheets (LPDDR4 on Apollo Lake)
+Interrupt Frequency,1000 interrupts/sec (estimate),Combined system and sensor interrupts
+,,
+,,
+,,
+Sensor speed: The seismic sensor takes measurements 10 to 100 times every second. This is a moderate speed to keep things manageable.,,
+,,
+Noise filtering: The processor cleans up the sensor data using a basic “smoothing” technique (like softening a rough picture). This method needs about 10 to 20 steps to work well.,,
+,,
+"Work done per measurement: For each sensor reading, the processor does around 20 simple math steps to reduce noise.",,
+,,
+Data size: Each sensor reading is a small amount of data—about the size of 2 to 4 letters in a text message.,,
+,,
+"Machine learning model: The AI model used to analyze this data is quite small, about the size of a short story (20,000 letters).",,
+,,
+"AI analysis frequency: The AI looks at the cleaned data about once every second, making it a steady but not rushed process.",,
+,,
+"AI work amount: Each time the AI runs its analysis, it does a few thousand math calculations—enough to recognize basic patterns without heavy computing.",,
+,,
+"Processor load: When the sensor reading, noise filtering, AI analysis, and other tasks all run together, the processor works at about 20% to 35% most of the time, with occasional peaks up to about half its capacity. This means there’s still plenty of room to handle other jobs.",,
+,,
+"Processor speed: The processor can handle up to 2 instructions at once every cycle, but on average, it usually processes about 1 to 1.2 instructions each cycle due to pauses or waiting for data.",,
+,,
+"Memory use: The processor’s internal memory is very fast and efficient—about 90% of the time, it quickly retrieves the needed data, and only occasionally needs to look somewhere slower.",,
+,,
+"Interrupts: The processor gets “interrupts” or signals to perform quick tasks less than 100 times every second, which helps it stay responsive without being overwhelmed.",,
